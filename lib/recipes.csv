@@ -1,4 +1,9 @@
-Boeuf bourguignon,Hearty red wine beef stew
-Cheese on toast,Josh's special treat
-Trouni's apple pie,Apple with pies
-Crumble,Crumble
+name,description,rating,prep_time,done
+Boeuf bourguignon,Hearty red wine beef stew,,,false
+Cheese on toast,Josh's special treat,,,false
+Trouni's apple pie,Apple with pies,,,false
+Crumble,Crumble,,,false
+Blended Strawberry Daiquiri,Decorate this blended strawberry daiquiri with a fresh strawberry for an extra presentation touch. Serve in a martini glass with a straw.,,,false
+eggs,over easy,5,3min,false
+Mexican Rice,This is an excellent authentic Mexican rice recipe (not to be confused with Spanish rice) that I make as a side dish with all of my Mexican dishes. The key is cooking the rice properly and using good quality chicken broth or stock.,4.5,5 mins,false
+omelette,eggs but different,5,5min,true

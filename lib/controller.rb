@@ -1,5 +1,6 @@
 require_relative 'view'
 require_relative 'recipe'
+require_relative 'scrape_allrecipes_service'
 
 class Controller
   def initialize(cookbook)
@@ -9,11 +10,17 @@ class Controller
 
   def import
     # tell view to ask user for keyword store in variable (keyword)
+    keyword = @view.ask_for('ingredient')
     # scrape all_recipes for the keyword, return instances of recipes
+    recipes = ScrapeAllrecipesService.new(keyword).call
     # gives those instances to the view to display
+    @view.display(recipes)
     # tell view to ask user for number (index)
+    index = @view.ask_for_index
     # recipe = get the recipe from the recipes array that the user chose
+    recipe = recipes[index]
     # give the recipe to the cookbook/repository
+    @cookbook.add_recipe(recipe)
   end
 
   def list
@@ -25,8 +32,15 @@ class Controller
     name = @view.ask_for('name')
     # 2. Ask the user for the description of the recipe
     description = @view.ask_for('description')
+    prep_time = @view.ask_for('prep time')
+    rating = @view.ask_for('rating')
     # 3. Create the recipe instance
-    recipe = Recipe.new(name, description)
+    recipe = Recipe.new(
+      name: name,
+      description: description,
+      prep_time: prep_time,
+      rating: rating
+    )
     # 4. Add the recipe to the cookbook
     @cookbook.add_recipe(recipe)
   end
@@ -38,6 +52,12 @@ class Controller
     index = @view.ask_for_index
     # 2. Destroy the recipe from the cookbook
     @cookbook.remove_recipe(index)
+  end
+
+  def mark_as_done
+    display_all_recipes
+    index = @view.ask_for_index
+    @cookbook.mark_as_done(index)
   end
 
   private
